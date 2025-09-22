@@ -1,0 +1,1 @@
+\copy covid_data FROM '/home/vella/covid_19_clean_complete.csv' DELIMITER ',' CSV HEADER;

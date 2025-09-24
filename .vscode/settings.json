@@ -1,18 +1,14 @@
 {
     "sqltools.connections": [
-        {
+       
+      {
             "ssh": "Disabled",
             "previewLimit": 50,
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
-            "name": "PG Local",
+            "name": "127.0.0.1",
             "database": "covid",
-            "username": "postgres",
-            "password": "Lazio1900",
-            "connectionTimeout": 30
+            "username": "vella87"
         }
     ]
-    ,
-    "r.rterm.linux": "/usr/bin/R"
-}

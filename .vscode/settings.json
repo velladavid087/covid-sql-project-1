@@ -13,4 +13,6 @@
             "connectionTimeout": 30
         }
     ]
+    ,
+    "r.rterm.linux": "/usr/bin/R"
 }

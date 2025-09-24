@@ -1,4 +1,3 @@
-
 -- Top 10 countries/regions with the highest death rates (deaths/confirmed cases) where confirmed cases are greater than 1000
 SELECT 
     country_region,
@@ -9,7 +8,8 @@ SELECT
     ORDER BY death_rate DESC
     LIMIT 10;
 
---Importing worldometer data
+--Importing worldometer data--
+
 SELECT 
     country_region,
     continent,
@@ -65,19 +65,18 @@ GROUP BY cd.country_region, cd.province_state, wm.total_cases, wm.total_deaths,
 ORDER BY covid_data_confirmed DESC NULLS LAST
 LIMIT 15;
 
--- Countries appearing in all three datasets
+-- Epidemiology Stats
 SELECT 
     cd.country_region,
+    cwl.who_region,
+    SUM(cd.confirmed) as covid_data_total,
     ROUND((SUM(cd.deaths)::numeric / SUM(cd.confirmed)), 2) AS death_rate,
     ROUND((cwl.new_cases::numeric / wm.population) * 100000, 2) AS incidence_per_100k,
-    SUM(cd.confirmed) as covid_data_total,
-    wm.total_cases as worldometer_total,
-    cwl.confirmed as country_wise_total,
-    wm.continent,
-    cwl.who_region
+    ROUND((cwl.deaths::numeric / NULLIF(cwl.confirmed, 0)) * 100, 2) AS CFR
 FROM covid_data cd
 INNER JOIN worldometer_data wm ON cd.country_region = wm.country_region
 INNER JOIN country_wise_latest cwl ON cd.country_region = cwl.country_region
-GROUP BY cd.country_region, wm.total_cases, cwl.confirmed, wm.continent, cwl.who_region, wm.new_cases, wm.population, cwl.new_cases
+GROUP BY cd.country_region, wm.total_cases, cwl.confirmed, wm.continent, cwl.who_region, wm.new_cases, wm.population, cwl.new_cases, cwl.deaths
 ORDER BY death_rate DESC
 LIMIT 10;
+

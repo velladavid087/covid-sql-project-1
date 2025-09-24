@@ -1,0 +1,26 @@
+name: covid-sql-project
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  - sqlalchemy
+  - psycopg2
+  - pip
+  - pip:
+    - -r requirements.txt
+    - ipython
+    - notebook
+
+# Optional: to add R support uncomment the two lines below (and ensure your conda has R packages available)
+#  - r-base
+#  - r-essentials
+
+# If you have an existing pip `requirements.txt` (exported from a venv), add it under the pip section like:
+#  - pip:
+#    - -r requirements.txt
